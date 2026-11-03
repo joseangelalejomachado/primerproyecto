@@ -6,13 +6,14 @@
     <title>Principal</title>
 </head>
 <body>
-    <h1>¡Hola, esta es mi primera página en DJango!</h1>
+    <h2>¡Hola, esta es mi primera página en DJango!</h2>
     <p>Hola esto es de programar en DJango.</p>
-    <!-- {{titulo}} | {{autor}} | {{cuerpo}} -->
+        {{titulo}} | {{autor}} | {{cuerpo}}
     <ul>
         {% for post in posts %}
-            <li>{{ post.titulo }} | {{ post.autor }} | {{ post.cuerpo }}</li>
+            <li><a href="{% url 'detalle_post' pk=post.pk %}">{{ post.titulo }} | {{ post.autor }} | {{ post.cuerpo }}</a></li>
         {% endfor %}
     </ul>
+
 </body>
 </html>

@@ -27,6 +27,10 @@ def principal(request):
     print(post_titulopost)
     return render(request, 'blog/principal.html', contexto)
 
+def detalle_post(request, pk):
+    contexto = Post.objects.get(id=pk)
+    return render(request, 'blog/detalle_post.html', {'post': contexto})
+
 # Función para llamar a una nueva vista
 def secundario(request):
     return render(request, 'blog/secundario.html')
