@@ -8,3 +8,6 @@ class Post(models.Model):
     # En CharField es obligatoria la longitud máxima. Equivale al varchar
     cuerpo = models.TextField()
     fecha_publicacion = models.DateTimeField()
+
+    def __str__(self):
+        return f"{self.titulo} ({self.autor})"
