@@ -8,5 +8,11 @@
 <body>
     <h1>¡Hola, esta es mi primera página en DJango!</h1>
     <p>Hola esto es de programar en DJango.</p>
+    <!-- {{titulo}} | {{autor}} | {{cuerpo}} -->
+    <ul>
+        {% for post in posts %}
+            <li>{{ post.titulo }} | {{ post.autor }} | {{ post.cuerpo }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>

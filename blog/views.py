@@ -7,6 +7,11 @@ def principal(request):
     posts = Post.objects.all()
     print(f"\nMostrando todos los posts: ")
 
+    # Diccionario de los objetos de la tabla Post
+    contexto = {
+        'posts': posts,
+    }
+
     print(posts)
     # Mostrando los objetos con un id especifico
     post1 = Post.objects.get(id=1)
@@ -20,7 +25,7 @@ def principal(request):
     post_titulopost = Post.objects.filter(titulo__icontains='post')
     print(f"\nPost que en el título contienen 'post'")
     print(post_titulopost)
-    return render(request, 'blog/principal.html')
+    return render(request, 'blog/principal.html', contexto)
 
 # Función para llamar a una nueva vista
 def secundario(request):
