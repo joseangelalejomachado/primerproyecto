@@ -4,6 +4,7 @@
 {% block contenido %}
     <!-- <h1>{{post.titulo}}</h1>
     <small>Autor: {{post.autor}}</small> -->
-    <p>Cuerpo: {{post.cuerpo}}</p>
+    <p>Cuerpo:</p>
+    <div>{{ post.cuerpo|linebreaks }}</div>
     <a href="{% url 'principal' %}">Volver a la página principal</a>
 {% endblock %}

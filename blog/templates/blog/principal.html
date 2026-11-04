@@ -6,7 +6,7 @@
     {% block contenido %}
         <ul>
         {% for post in posts %}
-            <li><a href="{% url 'detalle_post' pk=post.pk %}">{{ post.titulo }} | {{ post.autor }} | {{ post.cuerpo }}</a></li>
+            <li><a href="{% url 'detalle_post' pk=post.pk %}">{{ post.titulo }} ({{ post.autor }})</a></li>
         {% endfor %}
         </ul>
     <a href="{% url 'autores' %}">Listado de autores</a>
