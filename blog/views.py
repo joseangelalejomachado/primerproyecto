@@ -42,3 +42,12 @@ def autores(request):
         'autores': autores,
     }
     return render(request, 'blog/autores.html', contexto)
+
+def entradas_autor(request, autor):
+    posts = Post.objects.filter(autor=autor)
+
+    contexto = {
+        'posts': posts,
+        'autor': autor,
+    }
+    return render(request, 'blog/entradas_autor.html', contexto)

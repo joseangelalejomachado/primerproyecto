@@ -4,7 +4,11 @@
 {% block contenido %}
     <ul>
     {% for autor in autores %}
-        <li>{{ autor }}</li>
+        <li>
+            <a href="{% url 'entradas_autor' autor=autor%}">
+            {{ autor }}
+            </a>
+        </li>
     {% empty %}
         <li>No hay autores.</li>
     {% endfor %}

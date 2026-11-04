@@ -9,6 +9,8 @@
             <li><a href="{% url 'detalle_post' pk=post.pk %}">{{ post.titulo }} | {{ post.autor }} | {{ post.cuerpo }}</a></li>
         {% endfor %}
         </ul>
+    <a href="{% url 'autores' %}">Listado de autores</a>
     {% endblock %}
+
 </body>
 </html>

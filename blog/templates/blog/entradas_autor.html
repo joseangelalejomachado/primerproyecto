@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+
+{% block titulo %}
+    Entradas de {{ autor }}
+{% endblock %}
+
+{% block contenido %}
+    <ul>
+        {% for post in posts %}
+            <li>
+                <a href="{% url 'detalle_post' pk=post.pk %}">
+                    {{ post.titulo }}
+                </a>
+            </li>
+            {% empty %}
+            <li>Este autor no tiene entradas.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'autores' %}">Volver a autores</a>
+{% endblock%}
