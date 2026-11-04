@@ -1,19 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Principal</title>
-</head>
-<body>
-    <h2>¡Hola, esta es mi primera página en DJango!</h2>
+{% extends 'blog/base.html' %}
+{% block titulo %}Entradas del blog{% endblock %}
+    <!-- <h2>¡Hola, esta es mi primera página en DJango!</h2>
     <p>Hola esto es de programar en DJango.</p>
-        {{titulo}} | {{autor}} | {{cuerpo}}
-    <ul>
+        {{titulo}} | {{autor}} | {{cuerpo}} -->
+    {% block contenido %}
+        <ul>
         {% for post in posts %}
             <li><a href="{% url 'detalle_post' pk=post.pk %}">{{ post.titulo }} | {{ post.autor }} | {{ post.cuerpo }}</a></li>
         {% endfor %}
-    </ul>
-
+        </ul>
+    {% endblock %}
 </body>
 </html>

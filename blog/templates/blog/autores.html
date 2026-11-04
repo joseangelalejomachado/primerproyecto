@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+{% block titulo %}Autores{% endblock %}
+
+{% block contenido %}
+    <ul>
+    {% for autor in autores %}
+        <li>{{ autor }}</li>
+    {% empty %}
+        <li>No hay autores.</li>
+    {% endfor %}
+    </ul>
+
+<a href="{% url 'principal' %}">Volver a la página principal</a>
+{% endblock %}

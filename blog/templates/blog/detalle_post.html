@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>{{post.titulo}}</h1>
-    <small>Autor: {{post.autor}}</small>
+{% extends 'blog/base.html' %}
+{% block titulo %}{{post.titulo}} ({{post.autor}}) {% endblock %}
+
+{% block contenido %}
+    <!-- <h1>{{post.titulo}}</h1>
+    <small>Autor: {{post.autor}}</small> -->
     <p>Cuerpo: {{post.cuerpo}}</p>
     <a href="{% url 'principal' %}">Volver a la página principal</a>
-</body>
-</html>
+{% endblock %}

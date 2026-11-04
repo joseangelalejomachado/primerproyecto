@@ -34,3 +34,11 @@ def detalle_post(request, pk):
 # Función para llamar a una nueva vista
 def secundario(request):
     return render(request, 'blog/secundario.html')
+
+# Función para vista de autores.html
+def autores(request):
+    autores = Post.objects.values_list('autor', flat=True).distinct()
+    contexto = {
+        'autores': autores,
+    }
+    return render(request, 'blog/autores.html', contexto)
