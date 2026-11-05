@@ -5,7 +5,7 @@
     <ul>
     {% for autor in autores %}
         <li>
-            <a href="{% url 'entradas_autor' autor=autor%}">
+            <a href="{% url 'entradas_autor' pk=autor.pk %}">
             {{ autor }}
             </a>
         </li>

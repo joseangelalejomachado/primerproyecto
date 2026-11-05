@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Post
+from .models import Post, Autor
 
 # Create your views here.
 def principal(request):
@@ -37,13 +37,14 @@ def secundario(request):
 
 # Función para vista de autores.html
 def autores(request):
-    autores = Post.objects.values_list('autor', flat=True).distinct()
+    autores = Post.objects.all()
     contexto = {
         'autores': autores,
     }
     return render(request, 'blog/autores.html', contexto)
 
-def entradas_autor(request, autor):
+def entradas_autor(request, pk):
+    autor = Autor.objects.get(pk=pk)
     posts = Post.objects.filter(autor=autor)
 
     contexto = {
