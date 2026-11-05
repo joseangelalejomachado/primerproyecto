@@ -23,7 +23,7 @@ class Post(models.Model):
         on_delete=models.CASCADE, # Si se borra un autor, se borran todos sus posts
         related_name="posts",    # Related_name es el nombre que se le da a la relación inversa, es decir, desde un autor se puede acceder a sus posts con autor.posts.all()
     )
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name="posts")
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name="posts", null=True, blank=True) # null=True y blank=True permiten que la categoría sea opcional
     # En CharField es obligatoria la longitud máxima. Equivale al varchar
     cuerpo = models.TextField()
     fecha_publicacion = models.DateTimeField()

@@ -1,4 +1,6 @@
 {% extends 'blog/base.html' %}
+{% load static %}
+{%block css%} <link rel="stylesheet" href="{% static 'css/blog.css' %}"> {% endblock %}
 {% block titulo %}Entradas del blog{% endblock %}
     <!-- <h2>¡Hola, esta es mi primera página en DJango!</h2>
     <p>Hola esto es de programar en DJango.</p>
@@ -9,8 +11,17 @@
             <li><a href="{% url 'detalle_post' pk=post.pk %}">{{ post.titulo }}</a><a href="{% url 'entradas_autor' pk=post.autor.pk  %}">({{ post.autor }})</a></li>
         {% endfor %}
         </ul>
-    <a href="{% url 'autores' %}">Listado de autores</a>
     {% endblock %}
+{% block titulo2 %}Categorias del blog{% endblock %}
+    {% block contenido2 %}
+        <ul>
+            {% for categoria in categorias %}
+            <li><a href="{% url 'categoria' pk=categoria.pk %}">{{categoria.nombre}}</a></li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'autores' %}">Listado de autores</a>
+        <br>
+    {% endblock%}
 
 </body>
 </html>

@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% block titulo %}Post de la categoria {{ categoria.nombre }}{% endblock %}
+
+{% block contenido %}
+    <ul>
+    {% for post in categorias.posts.all %}
+        <li>
+            <a href="{% url 'detalle_post' pk=post.pk %}">
+                {{ post.titulo }}
+            </a>
+        </li>
+    {% empty %}
+        <li>No hay posts en esta categoría.</li>
+    {% endfor %}
+    </ul>
+
+<a href="{% url 'principal' %}">Volver a la página principal</a>
+{% endblock %}

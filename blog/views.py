@@ -1,15 +1,17 @@
 from django.shortcuts import render
-from .models import Post, Autor
+from .models import Post, Autor, Categoria
 
 # Create your views here.
 def principal(request):
     # Mostrando todos los objetos de la tabla Post (entradas del blog)
     posts = Post.objects.all()
+    categorias = Categoria.objects.all()
     print(f"\nMostrando todos los posts: ")
 
     # Diccionario de los objetos de la tabla Post
     contexto = {
         'posts': posts,
+        'categorias': categorias,
     }
 
     print(posts)
@@ -52,3 +54,12 @@ def entradas_autor(request, pk):
         'autor': autor,
     }
     return render(request, 'blog/entradas_autor.html', contexto)
+# Función para vista de categorias.html
+def categoria(request, pk):
+    categoria = Categoria.objects.get(pk=pk)
+    posts = Post.objects.filter(categoria=categoria)
+    contexto = {
+        'posts': posts,
+        'categorias': categoria,
+    }
+    return render(request, 'blog/categoria.html', contexto)
