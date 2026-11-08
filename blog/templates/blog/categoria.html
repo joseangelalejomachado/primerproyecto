@@ -1,18 +1,30 @@
 {% extends 'blog/base.html' %}
-{% block titulo %}Post de la categoria {{ categoria.nombre }}{% endblock %}
+
+{% block page_title %}{{ categorias.nombre }} | Mi blog{% endblock %}
 
 {% block contenido %}
-    <ul>
-    {% for post in categorias.posts.all %}
-        <li>
-            <a href="{% url 'detalle_post' pk=post.pk %}">
-                {{ post.titulo }}
-            </a>
-        </li>
-    {% empty %}
-        <li>No hay posts en esta categoría.</li>
-    {% endfor %}
-    </ul>
+<section class="listing-page">
+    <a class="back-link" href="{% url 'principal' %}">← Volver al inicio</a>
+    <p class="eyebrow">Categoría</p>
+    <h1>{{ categorias.nombre }}</h1>
+    <p class="lead">Entradas publicadas en esta categoría.</p>
 
-<a href="{% url 'principal' %}">Volver a la página principal</a>
+    <div class="post-list">
+        {% for post in categorias.posts.all %}
+            <a class="post-list-item" href="{% url 'detalle_post' pk=post.pk %}">
+                <span>
+                    <strong>{{ post.titulo }}</strong>
+                    <small>Por {{ post.autor }} · {{ post.fecha_publicacion|date:"d/m/Y" }}</small>
+                </span>
+                <span class="arrow" aria-hidden="true">→</span>
+            </a>
+        {% empty %}
+            <div class="empty-state">
+                <span class="empty-icon">✦</span>
+                <h3>No hay posts en esta categoría</h3>
+                <p>Prueba a explorar otra categoría.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}

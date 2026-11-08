@@ -1,21 +1,28 @@
 {% extends 'blog/base.html' %}
 
-{% block titulo %}
-    Entradas de {{ autor }}
-{% endblock %}
+{% block page_title %}Entradas de {{ autor }} | Mi blog{% endblock %}
 
 {% block contenido %}
-    <ul>
+<section class="listing-page">
+    <a class="back-link" href="{% url 'autores' %}">← Volver a autores</a>
+    <p class="eyebrow">Autor</p>
+    <h1>Entradas de {{ autor }}</h1>
+    <div class="post-list">
         {% for post in posts %}
-            <li>
-                <a href="{% url 'detalle_post' pk=post.pk %}">
-                    {{ post.titulo }}
-                </a>
-            </li>
-            {% empty %}
-            <li>Este autor no tiene entradas.</li>
+            <a class="post-list-item" href="{% url 'detalle_post' pk=post.pk %}">
+                <span>
+                    <strong>{{ post.titulo }}</strong>
+                    <small>{{ post.fecha_publicacion|date:"d/m/Y" }}</small>
+                </span>
+                <span class="arrow" aria-hidden="true">→</span>
+            </a>
+        {% empty %}
+            <div class="empty-state">
+                <span class="empty-icon">✦</span>
+                <h3>Este autor no tiene entradas</h3>
+                <p>Cuando publique algo, aparecerá aquí.</p>
+            </div>
         {% endfor %}
-    </ul>
-
-    <a href="{% url 'autores' %}">Volver a autores</a>
-{% endblock%}
+    </div>
+</section>
+{% endblock %}

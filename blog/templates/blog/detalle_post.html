@@ -1,12 +1,27 @@
-{% extends 'blog/base.html' %} {% block titulo %}{{post.titulo}}
-({{post.autor}}) {% endblock %} {% block contenido %}
-<!-- <h1>{{post.titulo}}</h1>
-    <small>Autor: {{post.autor}}</small> -->
-{% if post.imagen %}
-<img src="{{ post.imagen.url }}" alt="{{ post.titulo }}" width="300" />
-{% endif %}
-<p>Cuerpo:</p>
-<div>{{ post.cuerpo|linebreaks }}</div>
+{% extends 'blog/base.html' %}
 
-<a href="{% url 'principal' %}">Volver a la página principal</a>
+{% block page_title %}{{ post.titulo }} | Mi blog{% endblock %}
+
+{% block contenido %}
+<article class="detail-page">
+    <a class="back-link" href="{% url 'principal' %}">← Volver a todas las entradas</a>
+    <header class="detail-header">
+        <div class="post-meta">
+            {% if post.categoria %}
+                <a class="tag" href="{% url 'categoria' pk=post.categoria.pk %}">{{ post.categoria.nombre }}</a>
+            {% endif %}
+            <span>{{ post.fecha_publicacion|date:"d \d\e F \d\e Y" }}</span>
+        </div>
+        <h1>{{ post.titulo }}</h1>
+        <a class="author-link" href="{% url 'entradas_autor' pk=post.autor.pk %}">Por {{ post.autor }}</a>
+    </header>
+
+    {% if post.imagen %}
+        <img class="detail-image" src="{{ post.imagen.url }}" alt="{{ post.titulo }}">
+    {% elif post.imagen_url %}
+        <img class="detail-image" src="{{ post.imagen_url }}" alt="{{ post.titulo }}">
+    {% endif %}
+
+    <div class="detail-body">{{ post.cuerpo|linebreaks }}</div>
+</article>
 {% endblock %}

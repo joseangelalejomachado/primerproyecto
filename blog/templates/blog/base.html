@@ -1,18 +1,38 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mi blog personal">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     {% block css %}{% endblock %}
-    <title>Mi blog</title>
+    <title>{% block page_title %}Mi blog{% endblock %}</title>
 </head>
 <body>
-    <h1>{% block titulo %}{% endblock %}</h1>
-    {% block contenido %}
-    {% endblock %}
-    <h2>{% block titulo2 %}{% endblock %}</h2>
-    {% block contenido2 %}
-    {% endblock %}
+    <header class="site-header">
+        <div class="container header-content">
+            <a class="brand" href="{% url 'principal' %}">
+                <img class="brand-logo" src="{% static 'images/logo-mark-512.png' %}" alt="Logo de Jose Angel">
+                <span>Mi blog</span>
+            </a>
+            <nav class="site-nav" aria-label="Navegación principal">
+                <a href="{% url 'principal' %}">Inicio</a>
+                <a href="{% url 'autores' %}">Autores</a>
+                <a href="{% url 'principal' %}#categorias">Categorías</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container main-content">
+        {% block contenido %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <span>Mi blog</span>
+            <span>Hecho con Django</span>
+        </div>
+    </footer>
 </body>
 </html>

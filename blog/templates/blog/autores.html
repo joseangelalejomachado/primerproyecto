@@ -1,18 +1,30 @@
 {% extends 'blog/base.html' %}
-{% block titulo %}Autores{% endblock %}
+
+{% block page_title %}Autores | Mi blog{% endblock %}
 
 {% block contenido %}
-    <ul>
-    {% for autor in autores %}
-        <li>
-            <a href="{% url 'entradas_autor' pk=autor.pk %}">
-            {{ autor }}
-            </a>
-        </li>
-    {% empty %}
-        <li>No hay autores.</li>
-    {% endfor %}
-    </ul>
+<section class="listing-page">
+    <a class="back-link" href="{% url 'principal' %}">← Volver al inicio</a>
+    <p class="eyebrow">La comunidad</p>
+    <h1>Autores</h1>
+    <p class="lead">Descubre las publicaciones de cada autor del blog.</p>
 
-<a href="{% url 'principal' %}">Volver a la página principal</a>
+    <div class="author-grid">
+        {% for autor in autores %}
+            <a class="author-card" href="{% url 'entradas_autor' pk=autor.pk %}">
+                <span class="avatar">{{ autor.nombre|first|upper }}</span>
+                <span>
+                    <strong>{{ autor }}</strong>
+                    <small>Ver sus entradas →</small>
+                </span>
+            </a>
+        {% empty %}
+            <div class="empty-state">
+                <span class="empty-icon">◎</span>
+                <h3>No hay autores</h3>
+                <p>Todavía no se han añadido autores al blog.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}

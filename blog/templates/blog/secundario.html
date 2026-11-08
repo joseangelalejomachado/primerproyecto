@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secundario</title>
-</head>
-<body>
-    <h1>¡Pagina Secundaria!</h1>
-    <p>ME ENCANTA LA ASIGNATURA :D</p>
-</body>
-</html>
+{% extends 'blog/base.html' %}
+
+{% block page_title %}Página secundaria | Mi blog{% endblock %}
+
+{% block contenido %}
+<section class="welcome-page">
+    <span class="welcome-icon">✦</span>
+    <p class="eyebrow">Página secundaria</p>
+    <h1>¡Me encanta la asignatura!</h1>
+    <p class="lead">Gracias por visitar este rincón del blog.</p>
+    <a class="button" href="{% url 'principal' %}">Volver al inicio</a>
+</section>
+{% endblock %}

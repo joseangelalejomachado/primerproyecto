@@ -1,27 +1,80 @@
 {% extends 'blog/base.html' %}
-{% load static %}
-{%block css%} <link rel="stylesheet" href="{% static 'css/blog.css' %}"> {% endblock %}
-{% block titulo %}Entradas del blog{% endblock %}
-    <!-- <h2>¡Hola, esta es mi primera página en DJango!</h2>
-    <p>Hola esto es de programar en DJango.</p>
-        {{titulo}} | {{autor}} | {{cuerpo}} -->
-    {% block contenido %}
-        <ul>
-        {% for post in posts %}
-            <li><a href="{% url 'detalle_post' pk=post.pk %}">{{ post.titulo }}</a><a href="{% url 'entradas_autor' pk=post.autor.pk  %}">({{ post.autor }})</a></li>
-        {% endfor %}
-        </ul>
-    {% endblock %}
-{% block titulo2 %}Categorias del blog{% endblock %}
-    {% block contenido2 %}
-        <ul>
-            {% for categoria in categorias %}
-            <li><a href="{% url 'categoria' pk=categoria.pk %}">{{categoria.nombre}}</a></li>
-            {% endfor %}
-        </ul>
-        <a href="{% url 'autores' %}">Listado de autores</a>
-        <br>
-    {% endblock%}
 
-</body>
-</html>
+{% block page_title %}Inicio | Mi blog{% endblock %}
+
+{% block contenido %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">Historias, ideas y aprendizaje</p>
+        <h1>Un espacio para compartir lo que descubro.</h1>
+        <p class="hero-text">Explora las últimas entradas y encuentra publicaciones por autor o categoría.</p>
+    </div>
+    <div class="hero-decoration" aria-hidden="true">✦</div>
+</section>
+
+<div class="content-layout">
+    <section class="posts-section" aria-labelledby="ultimas-entradas">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">Contenido reciente</p>
+                <h2 id="ultimas-entradas">Últimas entradas</h2>
+            </div>
+            <span class="result-count">{{ posts|length }} publicaciones</span>
+        </div>
+
+        <div class="post-grid">
+            {% for post in posts %}
+            <article class="post-card">
+                {% if post.imagen %}
+                    <img class="post-image" src="{{ post.imagen.url }}" alt="{{ post.titulo }}">
+                {% elif post.imagen_url %}
+                    <img class="post-image" src="{{ post.imagen_url }}" alt="{{ post.titulo }}">
+                {% else %}
+                    <div class="post-image post-image-placeholder" aria-hidden="true">✦</div>
+                {% endif %}
+                <div class="post-card-body">
+                    <div class="post-meta">
+                        {% if post.categoria %}
+                            <a class="tag" href="{% url 'categoria' pk=post.categoria.pk %}">{{ post.categoria.nombre }}</a>
+                        {% endif %}
+                        <span>{{ post.fecha_publicacion|date:"d/m/Y" }}</span>
+                    </div>
+                    <h3><a href="{% url 'detalle_post' pk=post.pk %}">{{ post.titulo }}</a></h3>
+                    <p class="post-excerpt">{{ post.cuerpo|truncatewords:22 }}</p>
+                    <div class="post-footer">
+                        <a class="author-link" href="{% url 'entradas_autor' pk=post.autor.pk %}">{{ post.autor }}</a>
+                        <a class="read-more" href="{% url 'detalle_post' pk=post.pk %}">Leer más <span aria-hidden="true">→</span></a>
+                    </div>
+                </div>
+            </article>
+            {% empty %}
+            <div class="empty-state">
+                <span class="empty-icon">✦</span>
+                <h3>Aún no hay publicaciones</h3>
+                <p>Vuelve pronto para descubrir nuevas entradas.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <aside class="sidebar" id="categorias">
+        <div class="sidebar-card">
+            <p class="eyebrow">Explora</p>
+            <h2>Categorías</h2>
+            <ul class="link-list">
+                {% for categoria in categorias %}
+                    <li>
+                        <a href="{% url 'categoria' pk=categoria.pk %}">
+                            <span>{{ categoria.nombre }}</span>
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    </li>
+                {% empty %}
+                    <li class="muted">No hay categorías.</li>
+                {% endfor %}
+            </ul>
+            <a class="button button-outline" href="{% url 'autores' %}">Ver autores</a>
+        </div>
+    </aside>
+</div>
+{% endblock %}
