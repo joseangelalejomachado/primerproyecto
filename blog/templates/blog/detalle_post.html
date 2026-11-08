@@ -1,10 +1,12 @@
-{% extends 'blog/base.html' %}
-{% block titulo %}{{post.titulo}} ({{post.autor}}) {% endblock %}
-
-{% block contenido %}
-    <!-- <h1>{{post.titulo}}</h1>
+{% extends 'blog/base.html' %} {% block titulo %}{{post.titulo}}
+({{post.autor}}) {% endblock %} {% block contenido %}
+<!-- <h1>{{post.titulo}}</h1>
     <small>Autor: {{post.autor}}</small> -->
-    <p>Cuerpo:</p>
-    <div>{{ post.cuerpo|linebreaks }}</div>
-    <a href="{% url 'principal' %}">Volver a la página principal</a>
+{% if post.imagen %}
+<img src="{{ post.imagen.url }}" alt="{{ post.titulo }}" width="300" />
+{% endif %}
+<p>Cuerpo:</p>
+<div>{{ post.cuerpo|linebreaks }}</div>
+
+<a href="{% url 'principal' %}">Volver a la página principal</a>
 {% endblock %}

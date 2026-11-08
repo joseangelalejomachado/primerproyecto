@@ -17,16 +17,26 @@ class Categoria(models.Model):
         return self.nombre
 
 class Post(models.Model):
-    titulo = models.CharField(max_length=200)
+    titulo = models.CharField(max_length=200) # En CharField es obligatoria la longitud máxima. Equivale al varchar
     autor = models.ForeignKey(
         Autor,
         on_delete=models.CASCADE, # Si se borra un autor, se borran todos sus posts
         related_name="posts",    # Related_name es el nombre que se le da a la relación inversa, es decir, desde un autor se puede acceder a sus posts con autor.posts.all()
     )
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name="posts", null=True, blank=True) # null=True y blank=True permiten que la categoría sea opcional
-    # En CharField es obligatoria la longitud máxima. Equivale al varchar
+    categoria = models.ForeignKey(
+        Categoria,
+        on_delete=models.CASCADE,
+        related_name="posts",
+        null=True,
+        blank=True,
+    )
+    imagen = models.ImageField(
+        upload_to='posts/',
+        null=True,
+        blank=True,
+    )
     cuerpo = models.TextField()
     fecha_publicacion = models.DateTimeField()
-
+    
     def __str__(self):
         return f"{self.titulo} ({self.autor})"
