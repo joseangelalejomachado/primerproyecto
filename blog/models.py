@@ -35,6 +35,11 @@ class Post(models.Model):
         null=True,
         blank=True,
     )
+    imagen_url = models.URLField(
+        max_length=500,
+        null=True,
+        blank=True,
+    )
     cuerpo = models.TextField()
     fecha_publicacion = models.DateTimeField()
     

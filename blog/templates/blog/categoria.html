@@ -12,6 +12,11 @@
     <div class="post-list">
         {% for post in categorias.posts.all %}
             <a class="post-list-item" href="{% url 'detalle_post' pk=post.pk %}">
+                {% if post.imagen %}
+                    <img class="post-list-image" src="{{ post.imagen.url }}" alt="{{ post.titulo }}">
+                {% elif post.imagen_url %}
+                    <img class="post-list-image" src="{{ post.imagen_url }}" alt="{{ post.titulo }}">
+                {% endif %}
                 <span>
                     <strong>{{ post.titulo }}</strong>
                     <small>Por {{ post.autor }} · {{ post.fecha_publicacion|date:"d/m/Y" }}</small>
